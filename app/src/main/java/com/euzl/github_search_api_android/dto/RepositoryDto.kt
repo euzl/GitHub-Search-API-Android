@@ -20,8 +20,13 @@ data class RepositoryDto(
     val language: String?,
 
     @SerializedName("license")
-    val license: String?,
+    val license: LicenseDto,
 
     @SerializedName("updated_at")
     val updatedAt: Date?
-)
+) {
+    data class LicenseDto(
+        @SerializedName("name")
+        val name: String
+    )
+}
