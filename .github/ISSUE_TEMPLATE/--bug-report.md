@@ -10,6 +10,6 @@ assignees: euzl
 ## 증상
 
 ## TODO
-- [] 
+- [ ] 
 
 ## 스크린샷
