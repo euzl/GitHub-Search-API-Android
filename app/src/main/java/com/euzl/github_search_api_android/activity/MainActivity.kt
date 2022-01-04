@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -31,24 +32,24 @@ class MainActivity : AppCompatActivity() {
             if (id == EditorInfo.IME_ACTION_SEARCH) {
                 if (binding.searchEditText.text.toString() == "") {
                     Toast.makeText(this, "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
-                    false
                 }
 
                 val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
                 search(binding.searchEditText.text.toString())
-                true
             }
             false
         }
     }
 
     private fun search(searchWord: String) {
+        binding.progressBar.visibility = View.VISIBLE
         RepositoryService().getRepositoryList(searchWord, SearchCallback())
     }
 
     inner class SearchCallback : RetrofitCallback<SearchResponse> {
         override fun onSuccess(code: Int, res: SearchResponse) {
+            binding.progressBar.visibility = View.GONE
             Log.d(TAG, "onSuccess: ${res.totalCount}")
 
             if (res.items != null) {
@@ -66,10 +67,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onError(t: Throwable) {
+            binding.progressBar.visibility = View.GONE
             Log.d(TAG, "onError: ${t.message}")
         }
 
         override fun onFailure(code: Int) {
+            binding.progressBar.visibility = View.GONE
             Log.d(TAG, "onFailure: Error code $code")
         }
     }
