@@ -8,4 +8,5 @@
 
     <dimen name="list_item_title_text_size">20sp</dimen>
     <dimen name="list_item_description_text_size">18sp</dimen>
+    <dimen name="list_item_star_image_size">18dp</dimen>
 </resources>

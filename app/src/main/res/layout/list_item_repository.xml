@@ -8,11 +8,12 @@
             type="com.euzl.github_search_api_android.dto.RepositoryDto" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingTop="@dimen/list_item_repository_padding_size" >
+        android:paddingTop="@dimen/list_item_repository_padding_size"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/fullName"
@@ -20,78 +21,70 @@
             android:layout_height="wrap_content"
             android:text="@{dto.fullName}"
             android:textSize="@dimen/list_item_title_text_size"
-            android:textColor="@color/purple_main"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:textColor="@color/purple_main"/>
 
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{dto.description}"
             android:textSize="@dimen/list_item_description_text_size"
             android:layout_marginTop="@dimen/list_item_repository_margin_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fullName"/>
+            app:descriptionVisible="@{dto.description}"/>
 
-        <ImageView
-            android:id="@+id/starImage"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_star_outline_24"
-            android:layout_marginTop="@dimen/list_item_repository_margin_size"
-            app:layout_constraintTop_toBottomOf="@id/description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/gray_regular" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/starCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{dto.starCount.toString()}"
-            app:layout_constraintTop_toTopOf="@id/starImage"
-            app:layout_constraintBottom_toBottomOf="@id/starImage"
-            app:layout_constraintStart_toEndOf="@id/starImage"/>
+            <ImageView
+                android:id="@+id/starImage"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/list_item_star_image_size"
+                android:src="@drawable/ic_baseline_star_outline_24"
+                android:layout_marginTop="@dimen/list_item_repository_margin_size"
+                app:tint="@color/gray_regular" />
 
-        <TextView
-            android:id="@+id/language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{dto.language}"
-            android:layout_marginLeft="@dimen/list_item_repository_left_margin_size"
-            app:layout_constraintTop_toTopOf="@id/starImage"
-            app:layout_constraintBottom_toBottomOf="@id/starImage"
-            app:layout_constraintStart_toEndOf="@id/starCount" />
+            <TextView
+                android:id="@+id/starCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{dto.starCount.toString()}"
+                android:layout_gravity="bottom"/>
 
-        <TextView
-            android:id="@+id/license"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{dto.license}"
-            android:layout_marginLeft="@dimen/list_item_repository_left_margin_size"
-            app:layout_constraintTop_toTopOf="@id/starImage"
-            app:layout_constraintBottom_toBottomOf="@id/starImage"
-            app:layout_constraintStart_toEndOf="@id/language" />
+            <TextView
+                android:id="@+id/language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{dto.language}"
+                android:layout_marginLeft="@dimen/list_item_repository_left_margin_size"
+                android:layout_gravity="bottom" />
+
+            <TextView
+                android:id="@+id/license"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{dto.license.name}"
+                android:layout_marginLeft="@dimen/list_item_repository_left_margin_size"
+                android:layout_gravity="bottom" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/updateAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="update at"
-            android:layout_marginLeft="@dimen/list_item_repository_left_margin_size"
-            app:layout_constraintTop_toTopOf="@id/starImage"
-            app:layout_constraintBottom_toBottomOf="@id/starImage"
-            app:layout_constraintStart_toEndOf="@id/license"
+            android:layout_marginTop="@dimen/list_item_repository_margin_size"
+            app:layout_constraintTop_toBottomOf="@id/starImage"
+            app:layout_constraintStart_toStartOf="parent"
             app:date="@{dto.updatedAt}"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray_light"
-            app:layout_constraintTop_toBottomOf="@id/updateAt"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="@dimen/list_item_repository_padding_size" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>
