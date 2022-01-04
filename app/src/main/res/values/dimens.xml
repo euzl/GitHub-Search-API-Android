@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_padding_size">8dp</dimen>
+    <dimen name="activity_padding_size">12dp</dimen>
+
+    <dimen name="list_item_repository_left_margin_size">12dp</dimen>
+    <dimen name="list_item_repository_padding_size">18dp</dimen>
 </resources>
