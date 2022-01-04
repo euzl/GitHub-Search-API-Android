@@ -1,9 +1,11 @@
 package com.euzl.github_search_api_android.activity
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                     false
                 }
 
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
                 search(binding.searchEditText.text.toString())
                 true
             }
@@ -48,12 +52,16 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "onSuccess: ${res.totalCount}")
 
             if (res.items != null) {
+                Toast.makeText(this@MainActivity, "${res.totalCount}건이 조회됐습니다.", Toast.LENGTH_SHORT).show()
+
                 repositoryAdapter = RepositoryAdapter(this@MainActivity, res.items)
 
                 binding.recyclerView.apply {
                     layoutManager = LinearLayoutManager(this@MainActivity)
                     adapter = repositoryAdapter
                 }
+            } else {
+                Toast.makeText(this@MainActivity, "조회결과가 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
