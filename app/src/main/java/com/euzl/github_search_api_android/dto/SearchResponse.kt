@@ -9,27 +9,4 @@ data class SearchResponse (
 
     @SerializedName("items")
     val items: List<RepositoryDto>? = null
-) {
-    data class RepositoryDto(
-        @SerializedName("id")
-        val id: Int,
-
-        @SerializedName("full_name")
-        val fullName: String,
-
-        @SerializedName("description")
-        val description: String,
-
-        @SerializedName("stargazers_count")
-        val starCount: Int,
-
-        @SerializedName("language")
-        val language: String,
-
-        @SerializedName("license")
-        val license: String,
-
-        @SerializedName("updated_at")
-        val updatedAt: Date
-    )
-}
+)
